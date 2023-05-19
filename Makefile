@@ -1,4 +1,4 @@
-DB_URL=postgresql://root:postgres@localhost:5430/pggp_bank?sslmode=disable
+DB_URL=postgresql://root:postgres@localhost:5430/pggo_bank?sslmode=disable
 DB_CONTAINER=bank-postgres
 
 network:

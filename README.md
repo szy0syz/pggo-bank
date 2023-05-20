@@ -32,3 +32,14 @@ SQLC
 - Very fast & easy to use
 - Automatic code generation
 - Catch SQL query errors before generating codes
+
+ACID
+
+- Atomicity (A)
+  - Either all operations complete successfully or then transaction fails and the db is unchanged.
+- Consistency (C)
+  - The db state must be valid after the transaction. All constraints must be satisfied.
+- Isolation (I)
+  - Concurrent trans must not affect each other.
+- Durability (D)
+  - Data written by a successful transaction must be recorded in persistent storage

@@ -63,3 +63,13 @@ FOR UPDATE;
 需要注意的是，FOR UPDATE 锁只在事务内有效，因此这个查询通常需要在 BEGIN 和 COMMIT / ROLLBACK 语句之间执行。否则，由于大多数数据库系统在查询结束后自动提交事务，FOR UPDATE 锁会立即被释放。
 
 所以，总的来说，这两句SQL查询的主要区别在于后者会锁定选定的数据行，防止其他事务对这些行进行修改，直到当前事务结束。
+
+DB transaction lock & How to handle deadlock
+
+- 首先发现外键导致了死锁，取消外键可解决，但这无法满足数据一致性要求
+- 然后再goroutine里打印日志逐步排查
+- 最后使用`FOR NO KEY UPDATE;`解决
+- 最终使用一步更新，不Select锁定优化
+
+<img width="877" alt="image" src="https://github.com/szy0syz/pggo-bank/assets/10555820/f8fa655d-8692-4197-8e21-0a930e380aa1">
+

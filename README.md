@@ -43,3 +43,23 @@ ACID
   - Concurrent trans must not affect each other.
 - Durability (D)
   - Data written by a successful transaction must be recorded in persistent storage
+
+`FOR Update`
+
+```
+-- name: GetAccount :one
+SELECT * FROM accounts
+WHERE id = $1 LIMIT 1;
+
+-- name: GetAccountForUpdate :one
+SELECT * FROM accounts
+WHERE id = $1 LIMIT 1
+FOR UPDATE;
+```
+
+- GetAccount 是一个普通的 SELECT 查询，它只会读取匹配的数据，并不会对数据进行锁定。
+- GetAccountForUpdate 同样是 SELECT 查询，但是它带有 FOR UPDATE 子句，它会对查询到的数据行应用一个排他锁（Exclusive Lock）。这意味着，直到当前事务结束，其他事务都无法修改这些被锁定的数据行，以保证数据的一致性和防止并发事务产生的数据竞态问题。这在需要进行复杂更新或者是保证在一系列操作中数据不会被其他事务更改的情况下非常有用。
+
+需要注意的是，FOR UPDATE 锁只在事务内有效，因此这个查询通常需要在 BEGIN 和 COMMIT / ROLLBACK 语句之间执行。否则，由于大多数数据库系统在查询结束后自动提交事务，FOR UPDATE 锁会立即被释放。
+
+所以，总的来说，这两句SQL查询的主要区别在于后者会锁定选定的数据行，防止其他事务对这些行进行修改，直到当前事务结束。

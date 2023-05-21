@@ -10,13 +10,18 @@ RETURNING *;
 
 -- name: GetAccount :one
 SELECT * FROM accounts
-WHERE id = $1;
+WHERE id = $1 LIMIT 1;
+
+-- name: GetAccountForUpdate :one
+SELECT * FROM accounts
+WHERE id = $1 LIMIT 1
+FOR UPDATE;
 
 -- name: ListAccounts :many
 SELECT * FROM accounts
 WHERE owner = $1
 ORDER BY id
-  LIMIT $2
+LIMIT $2
 OFFSET $3;
 
 -- name: UpdateAccount :one

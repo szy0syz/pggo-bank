@@ -6,14 +6,13 @@ import (
 	"fmt"
 )
 
-// Store defines all functions to execute db queries and transactions
+// Store provides all functions to execute db queries and transaction
 type Store struct {
-	*Queries
 	db *sql.DB
+	*Queries
 }
 
-// SQLStore provides all functions to execute SQL queries and transactions
-
+// NewStore creates a new store
 func NewStore(db *sql.DB) *Store {
 	return &Store{
 		db:      db,
@@ -21,7 +20,7 @@ func NewStore(db *sql.DB) *Store {
 	}
 }
 
-// execTx executes a function within a database transaction
+// ExecTx executes a function within a database transaction
 func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 	tx, err := store.db.BeginTx(ctx, nil)
 	if err != nil {
@@ -106,23 +105,20 @@ func addMoney(
 	q *Queries,
 	accountID1 int64,
 	amount1 int64,
-	accountID2 int64, amount2 int64,
+	accountID2 int64,
+	amount2 int64,
 ) (account1 Account, account2 Account, err error) {
 	account1, err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
 		ID:     accountID1,
 		Amount: amount1,
 	})
 	if err != nil {
-		return // 注意这里因为我们返回值指名了变量名，所以这里不需要写了
+		return
 	}
 
 	account2, err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
 		ID:     accountID2,
 		Amount: amount2,
-	})
-	account1, err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
-		ID:     accountID1,
-		Amount: amount1,
 	})
 	return
 }

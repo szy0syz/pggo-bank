@@ -73,3 +73,37 @@ DB transaction lock & How to handle deadlock
 
 <img width="877" alt="image" src="https://github.com/szy0syz/pggo-bank/assets/10555820/f8fa655d-8692-4197-8e21-0a930e380aa1">
 
+### How to avoid deadlock in DB transaction?
+
+> Queries order matters!
+
+```sql
+BEGIN;
+
+UPDATE accounts SET balance = balance - 10 WHERE "id" = 1 RETURNING *;
+UPDATE accounts SET balance = balance + 10 WHERE "id" = 2 RETURNING *;
+
+ROLLBACK;
+
+
+
+-- Tx2: transfer $10 from account2 to account1
+BEGIN;
+
+UPDATE accounts SET balance = balance - 10 WHERE "id" = 2 RETURNING *;
+UPDATE accounts SET balance = balance + 10 WHERE "id" = 1 RETURNING *;
+
+ROLLBACK;
+
+-- docker exec -it bank-postgres psql -U root -d pggo_bank
+```
+
+```
+pggo_bank=*# UPDATE accounts SET balance = balance + 10 WHERE "id" = 1 RETURNING *;
+ERROR:  deadlock detected
+DETAIL:  Process 60 waits for ShareLock on transaction 841; blocked by process 50.
+Process 50 waits for ShareLock on transaction 842; blocked by process 60.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (0,74) in relation "accounts"
+```
+

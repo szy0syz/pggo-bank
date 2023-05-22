@@ -109,6 +109,11 @@ CONTEXT:  while updating tuple (0,74) in relation "accounts"
 
 ### Understand isolation levels & read phenomena
 
+![image](https://github.com/szy0syz/pggo-bank/assets/10555820/5d510f69-b5f6-44c0-88ed-7f83e77defab)
+
+![image](https://github.com/szy0syz/pggo-bank/assets/10555820/5b8d7a6e-96e6-4205-99fd-67483e8d07a0)
+
+![image](https://github.com/szy0syz/pggo-bank/assets/10555820/a4e49613-b46f-4cec-ac01-1601eabed454)
 
 ![image](https://github.com/szy0syz/pggo-bank/assets/10555820/d023f09f-2cf2-4a93-96f9-eebd1a6b0afb)
 

@@ -118,3 +118,14 @@ CONTEXT:  while updating tuple (0,74) in relation "accounts"
 ![image](https://github.com/szy0syz/pggo-bank/assets/10555820/d023f09f-2cf2-4a93-96f9-eebd1a6b0afb)
 
 ![image](https://github.com/szy0syz/pggo-bank/assets/10555820/122d2ce9-87a4-4f8e-a66d-00e73cc02d24)
+
+### Why mock database?
+
+- Independent tests
+- Faster tests
+- 100 coverage
+
+How to mock?
+
+Use Fake DB: Memory
+implement a fake version of DB: store data in memory

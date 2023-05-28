@@ -129,3 +129,5 @@ How to mock?
 
 Use Fake DB: Memory
 implement a fake version of DB: store data in memory
+
+> 为了达到测试覆盖率100%，我们得到所有代码路径全部走一遍，可以为 `黑盒` 准备不同输入，然后遍历这些输入，让其跑满所有路径！🤖

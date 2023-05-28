@@ -135,3 +135,14 @@ implement a fake version of DB: store data in memory
 ### About params validator
 
 我们在 `json:"currency" binding:"required,currency,oneof=USD EUR CAD"` 做了 `硬编码` 的校验，这里未来有问题，如新增currency类别，不可能重新修改代码。所以这里我们需要custom validator
+
+### Add users table with unique & foreign key constraints
+
+```
+migrate create -ext sql -dir db/migration -seq add_users
+
+-- 这两条效果都是一样的
+-- 可以用建符合索引的方式来约束出现, user1-USD, user1-USD 的情况
+-- CREATE UNIQUE INDEX ON "accounts" ("owner", "currency");
+ALTER TABLE "accounts" ADD CONSTRAINT "owner_currency_key" UNIQUE ("owner", "currency");
+```

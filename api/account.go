@@ -2,6 +2,7 @@ package api
 
 import (
 	"database/sql"
+	"github.com/lib/pq"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -42,6 +43,14 @@ type getAccountRequest struct {
 func (server *Server) getAccount(ctx *gin.Context) {
 	var req getAccountRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
+		if pqErr, ok := err.(*pq.Error); ok {
+			switch pqErr.Code.Name() {
+			case "foreign_key_violation", "unique_violation":
+				ctx.JSON(http.StatusForbidden, errorResponse(err))
+				return
+			}
+		}
+
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}

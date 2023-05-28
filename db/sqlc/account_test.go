@@ -3,16 +3,17 @@ package db
 import (
 	"context"
 	"database/sql"
-	"github.com/szy0syz/pggo-bank/util"
 	"testing"
 	"time"
 
 	"github.com/stretchr/testify/require"
+	"github.com/szy0syz/pggo-bank/util"
 )
 
 func createRandomAccount(t *testing.T) Account {
+	user := createRandomUser(t)
 	arg := CreateAccountParams{
-		Owner:    util.RandomOwner(),
+		Owner:    user.Username,
 		Balance:  util.RandomMoney(),
 		Currency: util.RandomCurrency(),
 	}

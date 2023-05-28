@@ -131,3 +131,7 @@ Use Fake DB: Memory
 implement a fake version of DB: store data in memory
 
 > 为了达到测试覆盖率100%，我们得到所有代码路径全部走一遍，可以为 `黑盒` 准备不同输入，然后遍历这些输入，让其跑满所有路径！🤖
+
+### About params validator
+
+我们在 `json:"currency" binding:"required,currency,oneof=USD EUR CAD"` 做了 `硬编码` 的校验，这里未来有问题，如新增currency类别，不可能重新修改代码。所以这里我们需要custom validator

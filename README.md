@@ -148,3 +148,11 @@ ALTER TABLE "accounts" ADD CONSTRAINT "owner_currency_key" UNIQUE ("owner", "cur
 ```
 
 <img width="1314" alt="image" src="https://github.com/szy0syz/pggo-bank/assets/10555820/5e47e728-012a-4256-9d71-9f7b8649444a">
+
+### Why PASETO is better than JWT for token-based authentication?
+
+![image](https://github.com/szy0syz/pggo-bank/assets/10555820/cf26d3d6-85c4-4bdd-84b9-415d8c66743d)
+
+![image](https://github.com/szy0syz/pggo-bank/assets/10555820/81ee1915-8bf6-429f-afc3-26e912986da4)
+
+![image](https://github.com/szy0syz/pggo-bank/assets/10555820/5d009113-1d4b-492c-9059-3640824ddc03)

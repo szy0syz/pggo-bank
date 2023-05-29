@@ -146,3 +146,5 @@ migrate create -ext sql -dir db/migration -seq add_users
 -- CREATE UNIQUE INDEX ON "accounts" ("owner", "currency");
 ALTER TABLE "accounts" ADD CONSTRAINT "owner_currency_key" UNIQUE ("owner", "currency");
 ```
+
+<img width="1314" alt="image" src="https://github.com/szy0syz/pggo-bank/assets/10555820/5e47e728-012a-4256-9d71-9f7b8649444a">

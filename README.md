@@ -156,3 +156,11 @@ ALTER TABLE "accounts" ADD CONSTRAINT "owner_currency_key" UNIQUE ("owner", "cur
 ![image](https://github.com/szy0syz/pggo-bank/assets/10555820/81ee1915-8bf6-429f-afc3-26e912986da4)
 
 ![image](https://github.com/szy0syz/pggo-bank/assets/10555820/5d009113-1d4b-492c-9059-3640824ddc03)
+
+<img width="767" alt="image" src="https://github.com/szy0syz/pggo-bank/assets/10555820/62d22bf7-aee5-4edc-b99e-62a5e10b57a8">
+
+<img width="881" alt="image" src="https://github.com/szy0syz/pggo-bank/assets/10555820/164cf130-764b-4ac9-8c19-7386fb23b6f1">
+
+- 体会到Go语言面向接口+组合的强大之处 👍🏻 
+![image](https://github.com/szy0syz/pggo-bank/assets/10555820/19d90c51-7002-4eb0-9001-8e9b62b6dd94)
+

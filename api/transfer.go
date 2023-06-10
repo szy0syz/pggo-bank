@@ -2,13 +2,15 @@ package api
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	db "github.com/szy0syz/pggo-bank/db/sqlc"
-	"net/http"
+	"github.com/szy0syz/pggo-bank/token"
 )
 
-// TODO: unit tests
 type transferRequest struct {
 	FromAccountID int64  `json:"from_account_id" binding:"required,min=1"`
 	ToAccountID   int64  `json:"to_account_id" binding:"required,min=1"`
@@ -23,7 +25,19 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 		return
 	}
 
-	_, valid := server.validAccount(ctx, req.ToAccountID, req.Currency)
+	fromAccount, valid := server.validAccount(ctx, req.FromAccountID, req.Currency)
+	if !valid {
+		return
+	}
+
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if fromAccount.Owner != authPayload.Username {
+		err := errors.New("from account doesn't belong to the authenticated user")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+
+	_, valid = server.validAccount(ctx, req.ToAccountID, req.Currency)
 	if !valid {
 		return
 	}
@@ -37,6 +51,7 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 	result, err := server.store.TransferTx(ctx, arg)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
 	}
 
 	ctx.JSON(http.StatusOK, result)

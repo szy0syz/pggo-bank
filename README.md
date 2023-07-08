@@ -176,3 +176,10 @@ ALTER TABLE "accounts" ADD CONSTRAINT "owner_currency_key" UNIQUE ("owner", "cur
 - review the code
 - `make mock` regenerate the mock store
 - `make test` make sure the all tests is passed
+
+### Database resource
+
+- https://dbdocs.io/szy0syz/pggo_bank
+- `npm install -g @dbml/cli`
+- `make db_schema`
+- `make db_docs`

@@ -164,3 +164,15 @@ ALTER TABLE "accounts" ADD CONSTRAINT "owner_currency_key" UNIQUE ("owner", "cur
 - 体会到Go语言面向接口+组合的强大之处 👍🏻 
 ![image](https://github.com/szy0syz/pggo-bank/assets/10555820/19d90c51-7002-4eb0-9001-8e9b62b6dd94)
 
+### Add new resource
+
+- `make new_migration name=add_sessions`
+- update the `db/migration/003_xxx.up.sql` `db/migration/003_xxx.down.sql`
+- `make migrateup`
+- review database
+- update the `db/query/seesion.sql`
+- `make sqlc`
+- should add `/db/sqlc/session.sql.go` for Golang code
+- review the code
+- `make mock` regenerate the mock store
+- `make test` make sure the all tests is passed

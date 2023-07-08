@@ -18,4 +18,4 @@ WHERE
         to_account_id = $2
 ORDER BY id
     LIMIT $3
-OFFSET $4;req.Owner
+OFFSET $4;

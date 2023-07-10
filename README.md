@@ -179,7 +179,13 @@ ALTER TABLE "accounts" ADD CONSTRAINT "owner_currency_key" UNIQUE ("owner", "cur
 
 ### Database resource
 
+<img width="1444" alt="image" src="https://github.com/szy0syz/pggo-bank/assets/10555820/f0a14208-7c70-475b-99b9-e2630d6c1f86">
+
 - https://dbdocs.io/szy0syz/pggo_bank
 - `npm install -g @dbml/cli`
 - `make db_schema`
 - `make db_docs`
+
+## gRPC
+
+<img width="1358" alt="image" src="https://github.com/szy0syz/pggo-bank/assets/10555820/f3ae1a84-3d94-4277-b227-ad2ed613a525">

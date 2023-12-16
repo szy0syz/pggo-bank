@@ -7,7 +7,7 @@ import "rpc_login_user.proto";
 
 option go_package="github.com/szy0syz/pggo-bank/pb";
 
-service SimpleBank {
+service PggoBank {
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {}
   rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {}
 }

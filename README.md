@@ -189,3 +189,10 @@ ALTER TABLE "accounts" ADD CONSTRAINT "owner_currency_key" UNIQUE ("owner", "cur
 ## gRPC
 
 <img width="1358" alt="image" src="https://github.com/szy0syz/pggo-bank/assets/10555820/f3ae1a84-3d94-4277-b227-ad2ed613a525">
+
+- brew install protobuf
+- protoc --version
+- go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+- go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+- export PATH="$PATH:$(go env GOPATH)/bin"
+

@@ -7,6 +7,9 @@ network:
 postgres:
 	docker run --name "$(DB_CONTAINER)" --network bank-network -p 5430:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=postgres -d postgres:14-alpine
 
+restartdb:
+	docker restart "$(DB_CONTAINER)"
+
 createdb:
 	docker exec -it "$(DB_CONTAINER)" createdb --username=root --owner=root pggo_bank
 

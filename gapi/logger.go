@@ -25,7 +25,12 @@ func GrpcLogger(
 		statusCode = st.Code()
 	}
 
-	log.Info().
+	logger := log.Info()
+	if err != nil {
+		logger = log.Error().Err(err)
+	}
+
+	logger.
 		Str("protocol", "grpc").
 		Int("status_code", int(statusCode)).
 		Str("status_text", statusCode.String()).

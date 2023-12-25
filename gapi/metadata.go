@@ -18,7 +18,7 @@ type Metadata struct {
 	ClientIP  string
 }
 
-func (server *Server) ectractMetadata(ctx context.Context) *Metadata {
+func (server *Server) extractMetadata(ctx context.Context) *Metadata {
 	mtdt := &Metadata{}
 
 	if md, ok := metadata.FromIncomingContext(ctx); ok {

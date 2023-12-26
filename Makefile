@@ -10,6 +10,9 @@ postgres:
 restartdb:
 	docker restart "$(DB_CONTAINER)"
 
+restartredis:
+	docker restart redis
+
 createdb:
 	docker exec -it "$(DB_CONTAINER)" createdb --username=root --owner=root pggo_bank
 

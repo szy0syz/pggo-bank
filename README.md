@@ -81,13 +81,11 @@ ok      github.com/rexfordnyrk/go-db-comparison/benchmarks      77.835s
 ```
 
 #### Conclusion
-While database/sql is the default Golang package, whether you should use it or not depends on your needs as a developer. In this article, you saw the advantages of each package.
+> While database/sql is the default Golang package, whether you should use it or not depends on your needs as a developer. In this article, you saw the advantages of each package.
 
-GORM is the best package for you if you need advanced querying, full support functions from underlying database technologies, and a clean codebase—as long as you’re willing to trade off some performance. If you only need basic queries and are comfortable writing your own SQL, then the database/sql or sqlx packages will do just fine.
+> GORM is the best package for you if you need advanced querying, full support functions from underlying database technologies, and a clean codebase—as long as you’re willing to trade off some performance. If you only need basic queries and are comfortable writing your own SQL, then the database/sql or sqlx packages will do just fine.
 
-Finally, sqlc is best suited for backend developers who work extensively with databases and need to write lots of queries under tight deadlines. You can write your raw SQL queries and generate code without having to worry about types, scanning, or other obstacles to productivity. sqlc also provides great performance gains compared to the rest, especially when dealing with greater volumes of data or record sets.
-
-Note that this article has been updated due to an error in benchmarking. Many thanks to Lukáš Zapletal, who commented on the original article with a fix for the bug. Thank you as well to the JetBrains community for providing spaces like this that are designed for learning and contributing together.
+> Finally, sqlc is best suited for backend developers who work extensively with databases and need to write lots of queries under tight deadlines. You can write your raw SQL queries and generate code without having to worry about types, scanning, or other obstacles to productivity. sqlc also provides great performance gains compared to the rest, especially when dealing with greater volumes of data or record sets.
 
 ACID
 

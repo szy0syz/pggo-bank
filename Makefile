@@ -1,5 +1,6 @@
 DB_URL=postgresql://root:postgres@localhost:5430/pggo_bank?sslmode=disable
 DB_CONTAINER=bank-postgres
+REDIS_CONTAINER=bank-redis
 
 network:
 	docker network create bank-network
@@ -9,9 +10,6 @@ postgres:
 
 restartdb:
 	docker restart "$(DB_CONTAINER)"
-
-restartredis:
-	docker restart redis
 
 createdb:
 	docker exec -it "$(DB_CONTAINER)" createdb --username=root --owner=root pggo_bank
@@ -66,6 +64,9 @@ evans:
 	evans --host localhost --port 9090 -r repl
 
 redis:
-	docker run --name redis -p 6379:6379 -d redis:7-alpine
+	docker run --name "$(REDIS_CONTAINER)" -p 6379:6379 -d redis:7-alpine
+
+restartredis:
+	docker restart "$(REDIS_CONTAINER)"
 
 .PHONY: network postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 new_migration db_docs db_schema sqlc test server mock proto evans redis

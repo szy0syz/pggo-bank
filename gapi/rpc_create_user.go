@@ -2,14 +2,12 @@ package gapi
 
 import (
 	"context"
-	"errors"
 	"github.com/hibiken/asynq"
 	"github.com/szy0syz/pggo-bank/val"
 	"github.com/szy0syz/pggo-bank/worker"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"time"
 
-	"github.com/lib/pq"
 	db "github.com/szy0syz/pggo-bank/db/sqlc"
 	"github.com/szy0syz/pggo-bank/pb"
 	"github.com/szy0syz/pggo-bank/util"
@@ -51,12 +49,8 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 
 	txResult, err := server.store.CreateUserTx(ctx, arg)
 	if err != nil {
-		var pqErr *pq.Error
-		if errors.As(err, &pqErr) {
-			switch pqErr.Code.Name() {
-			case "unique_violation":
-				return nil, status.Errorf(codes.AlreadyExists, "username already exists: %s", err)
-			}
+		if db.ErrorCode(err) == db.UniqueViolation {
+			return nil, status.Errorf(codes.AlreadyExists, err.Error())
 		}
 		return nil, status.Errorf(codes.Internal, "failed to create user: %s", err)
 	}

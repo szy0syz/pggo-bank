@@ -6,7 +6,6 @@ import (
 	"github.com/szy0syz/pggo-bank/val"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 
-	"database/sql"
 	db "github.com/szy0syz/pggo-bank/db/sqlc"
 	"github.com/szy0syz/pggo-bank/pb"
 	"github.com/szy0syz/pggo-bank/util"
@@ -23,7 +22,7 @@ func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (
 
 	user, err := server.store.GetUser(ctx, req.GetUsername())
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
+		if errors.Is(err, db.ErrRecordNotFound) {
 			return nil, status.Errorf(codes.NotFound, "user not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to find user")
